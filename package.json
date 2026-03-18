@@ -1,0 +1,12 @@
+{
+  "name": "hackathon-day-planner",
+  "version": "1.0.0",
+  "description": "Assistive weekly planner MVP with Telegram and Google Calendar hooks.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "smoke": "node smoke-test.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "license": "MIT"
+}
