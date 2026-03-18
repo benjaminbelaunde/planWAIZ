@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assistive Weekly Planner</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">Hackathon MVP</p>
+          <h1>Assistive Weekly Planner</h1>
+          <p class="lede">
+            Plan the week from Telegram-style inputs, review the proposal in a clear calendar,
+            and accept changes before writing to Google Calendar.
+          </p>
+        </div>
+        <div class="status-panel" id="connectionStatus"></div>
+      </section>
+
+      <section class="top-plan-section">
+        <article class="panel calendar-panel">
+          <div class="panel-header">
+            <h2>Week Plan</h2>
+            <div class="button-row">
+              <button id="acceptPlanBtn" type="button">Accept plan</button>
+              <button id="rejectPlanBtn" type="button" class="secondary">Reject plan</button>
+            </div>
+          </div>
+          <div id="planNotes" class="notes"></div>
+          <div id="calendarGrid" class="calendar-grid"></div>
+        </article>
+      </section>
+
+      <section class="grid">
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Tasks</h2>
+            <span id="taskSummary" class="pill"></span>
+          </div>
+          <div id="taskList" class="task-list"></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-header">
+            <h2>Events</h2>
+            <div class="button-row">
+              <span id="eventSummary" class="pill"></span>
+              <a id="eventsCsvLink" class="csv-link" href="/data/events.csv" target="_blank" rel="noreferrer">Open CSV</a>
+            </div>
+          </div>
+          <div id="eventList" class="task-list"></div>
+        </article>
+
+        <article class="panel">
+          <h2>Setup</h2>
+          <form id="setupForm" class="stack">
+            <label>Name <input name="name" placeholder="Hackathon User" /></label>
+            <label>Workday start <input name="workdayStart" type="time" value="09:00" /></label>
+            <label>Workday end <input name="workdayEnd" type="time" value="18:00" /></label>
+            <label>Plan horizon (days) <input name="planHorizonDays" type="number" min="1" max="14" value="7" /></label>
+            <label>Active window <input name="activeWindow" value="17:00-20:00" /></label>
+            <label>Gym name <input name="gymName" placeholder="Optional" /></label>
+            <label>Healthy task types <input name="healthyTaskTypes" placeholder="walk,gym" /></label>
+            <button type="submit">Save setup</button>
+          </form>
+        </article>
+
+        <article class="panel chat-panel">
+          <div class="panel-header">
+            <h2>Planner Chat</h2>
+            <span class="pill">Telegram-style</span>
+          </div>
+          <div id="chatHistory" class="chat-history"></div>
+          <form id="chatForm" class="stack">
+            <label>Message
+              <textarea name="text" rows="4" placeholder="Finish deck in 120m by tomorrow 5pm priority high or /plan"></textarea>
+            </label>
+            <div class="button-row">
+              <button type="submit">Send</button>
+              <button id="generatePlanBtn" type="button">Generate plan</button>
+              <button id="importCalendarBtn" type="button">Import Google events</button>
+            </div>
+          </form>
+          <form id="replanForm" class="inline-form">
+            <input name="delayMinutes" type="number" min="0" value="30" />
+            <button type="submit">Replan after delay</button>
+          </form>
+          <p class="muted">Use natural language or commands like <code>/add</code>, <code>/plan</code>, <code>/replan 45</code>, and <code>/accept</code>.</p>
+        </article>
+      </section>
+    </main>
+
+    <template id="taskTemplate">
+      <div class="task-card">
+        <div>
+          <h3></h3>
+          <p class="task-meta"></p>
+        </div>
+        <div class="button-row compact">
+          <button class="delete-task-btn secondary" type="button">Delete</button>
+        </div>
+      </div>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
